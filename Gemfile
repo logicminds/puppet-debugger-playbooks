@@ -1,10 +1,7 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in puppet-debugger-playbooks.gemspec
-gemspec
-
 group :dev, :test do
-  gem 'puppet-debugger'
+  gem 'puppet-debugger', github: 'nwops/puppet-debugger'
   gem 'pry'
   gem 'CFPropertyList'
   gem 'rake'

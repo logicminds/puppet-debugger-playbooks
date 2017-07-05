@@ -1,10 +1,6 @@
 require 'spec_helper'
 require 'puppet-debugger/plugin_test_helper'
 
-def playbooks_dir
-  File.join(fixtures_dir, 'playbooks')
-end
-
 describe :playbooks do
   include_examples 'plugin_tests'
 
