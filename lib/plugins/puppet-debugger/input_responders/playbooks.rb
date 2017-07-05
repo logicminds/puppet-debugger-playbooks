@@ -7,20 +7,13 @@ module PuppetDebugger
       COMMAND_GROUP = :editing
 
       def self.command_completion(buffer_words)
-        if buffer_words.count < 1
-          directories.map do |d|
-            files = Dir.glob(File.join(d, '**', '*'))
-            files.map { |f| f.match(/playbooks\/(.*)\//); $1 }.compact.uniq
-          end.flatten
-        else
-          directories.map do |d|
-            path = File.join(d, *buffer_words)
-            glob_path = File.directory?(path) ? File.join(path, '*') : path + '*'
-            files = Dir.glob(glob_path)
-            dirs = files.grep(path).map { |f| File.basename(f, File.extname(f)) }
-            files.find_all {|d| d.match(path) }.map { |f| File.basename(f, File.extname(f)) } - dirs
-          end.flatten
-        end
+        directories.map do |d|
+          path = File.join(d, *buffer_words)
+          glob_path = File.directory?(path) ? File.join(path, '*') : path + '*'
+          files = Dir.glob(glob_path)
+          dirs = files.grep(path).map { |f| File.basename(f, File.extname(f)) }
+          files.find_all {|d| d.match(path) }.map { |f| File.basename(f, File.extname(f)) } - dirs
+        end.flatten.sort
       end
 
       def self.directories

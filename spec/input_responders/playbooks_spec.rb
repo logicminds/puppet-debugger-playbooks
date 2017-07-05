@@ -72,25 +72,6 @@ describe :playbooks do
     end
   end
 
-  describe 'command completion' do
-    it 'returns possible playbooks' do
-      allow(plugin.class).to receive(:playbooks_dir_list).and_return([playbooks_dir])
-      expect(plugin.class.command_completion([])).to eq(['example_group'])
-    end
-
-    it 'returns possible sub play commands' do
-      allow(plugin.class).to receive(:playbooks_dir_list).and_return([playbooks_dir])
-      expect(plugin.class.command_completion(['example_group'])).to eq(['graph', 'partitions_check'])
-    end
-
-    it 'returns possible play commands' do
-      allow(plugin.class).to receive(:playbooks_dir_list).and_return([playbooks_dir])
-      words = plugin.class.command_completion(['example_group', 'graph'])
-      expect(words).to eq(['graph'])
-    end
-
-  end
-
   describe 'playbook file' do
     it 'returns no play file when directory' do
       allow(plugin.class).to receive(:playbooks_dir_list).and_return([playbooks_dir])
